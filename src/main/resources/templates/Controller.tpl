@@ -15,7 +15,7 @@ import java.util.List;
 }, allowCredentials = "true")
 @RestController
 @AllArgsConstructor
-@Tag(name = "{{ClassName}}s")
+@Tag(name = "{{ClassName}}")
 public class {{ClassName}}Controller {
     private final {{ClassName}}Service service;
 

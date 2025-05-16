@@ -3,6 +3,7 @@ package com.matimi;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 
 public class TemplateEngine {
@@ -40,4 +41,16 @@ public class TemplateEngine {
 
         return stringBuilder.toString();
     }
+
+    public static String generateFieldsFromDefinitions(List<CrudWizard.FieldDefinition> fields) {
+        StringBuilder builder = new StringBuilder();
+        for (CrudWizard.FieldDefinition field : fields) {
+            for (String annotation : field.annotations()) {
+                builder.append("    ").append(annotation).append("\n");
+            }
+            builder.append("    private ").append(field.type()).append(" ").append(field.name()).append(";\n\n");
+        }
+        return builder.toString().trim();
+    }
+
 }

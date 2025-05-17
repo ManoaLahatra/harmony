@@ -46,15 +46,21 @@ public class CrudWizard {
         while (true) {
             System.out.print("➕ Add field ? (y/n) : ");
             String choice = scanner.nextLine().trim();
-            if (!choice.equalsIgnoreCase("y")) break;
+            if (!choice.equalsIgnoreCase("y")) {
+                break;
+            }
 
             String name = prompt(scanner, "    📝 Field name");
             String type = prompt(scanner, "    🧬 Field type (ex: String, int, LocalDate)");
 
             List<String> annotations = new ArrayList<>();
             while (true) {
-                String annotation = prompt(scanner, "    🔖 Annotation ? (ex: @NotNull, @Size(max=255)) (Enter for next)");
-                if (annotation.isBlank()) break;
+                String annotation = prompt(
+                        scanner,
+                        "    🔖 Annotation ? (ex: @NotNull, @Size(max=255)) (Enter for next)");
+                if (annotation.isBlank()) {
+                    break;
+                }
                 annotations.add(annotation);
             }
 

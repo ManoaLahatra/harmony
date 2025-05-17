@@ -3,6 +3,7 @@ package com.matimi;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 
 public class TemplateEngine {
@@ -29,15 +30,15 @@ public class TemplateEngine {
         }
     }
 
-    public static String generateFields(Map<String, String> fields) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<String, String> entry : fields.entrySet()) {
-            stringBuilder
-                    .append("    private ")
-                    .append(entry.getValue()).append(" ")
-                    .append(entry.getKey()).append(";\n");
+    public static String generateFieldsFromDefinitions(List<CrudWizard.FieldDefinition> fields) {
+        StringBuilder builder = new StringBuilder();
+        for (CrudWizard.FieldDefinition field : fields) {
+            for (String annotation : field.annotations()) {
+                builder.append("    ").append(annotation).append("\n");
+            }
+            builder.append("    private ").append(field.type()).append(" ").append(field.name()).append(";\n\n");
         }
-
-        return stringBuilder.toString();
+        return builder.toString().trim();
     }
+
 }

@@ -30,18 +30,6 @@ public class TemplateEngine {
         }
     }
 
-    public static String generateFields(Map<String, String> fields) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<String, String> entry : fields.entrySet()) {
-            stringBuilder
-                    .append("    private ")
-                    .append(entry.getValue()).append(" ")
-                    .append(entry.getKey()).append(";\n");
-        }
-
-        return stringBuilder.toString();
-    }
-
     public static String generateFieldsFromDefinitions(List<CrudWizard.FieldDefinition> fields) {
         StringBuilder builder = new StringBuilder();
         for (CrudWizard.FieldDefinition field : fields) {

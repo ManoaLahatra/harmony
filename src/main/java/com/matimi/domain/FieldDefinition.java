@@ -1,5 +1,4 @@
-/* (C)2025 */
-package com.matimi;
+package com.matimi.domain;
 
 import java.util.List;
 

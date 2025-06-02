@@ -1,11 +1,15 @@
-/* (C)2025 */
 package com.matimi;
+
+import com.matimi.generator.CrudWizard;
+import com.matimi.generator.JsonCrudGenerator;
+import com.matimi.template.TemplateEngine;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        TemplateEngine engine = new TemplateEngine("src/main/resources/templates");
 
         System.out.println("=== 🚀 Spring Boot CRUD Generator ===");
         System.out.println("1. Interactive mode");
@@ -17,9 +21,8 @@ public class Main {
         if ("2".equals(choice)) {
             System.out.print("Enter JSON file path: ");
             String jsonPath = scanner.nextLine().trim();
-
             try {
-                new JsonCrudGenerator("src/main/resources/templates").generateFromJson(jsonPath);
+                new JsonCrudGenerator(engine).generateFromJson(jsonPath);
                 System.out.println("🎉 Generation finished successfully from JSON!");
             } catch (Exception e) {
                 System.err.println("❌ Error processing JSON file: " + e.getMessage());

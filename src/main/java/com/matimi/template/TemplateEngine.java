@@ -1,5 +1,6 @@
-/* (C)2025 */
-package com.matimi;
+package com.matimi.template;
+
+import com.matimi.domain.FieldDefinition;
 
 import java.io.IOException;
 import java.nio.file.Files;

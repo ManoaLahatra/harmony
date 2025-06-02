@@ -1,13 +1,26 @@
-/* (C)2025 */
-package com.matimi;
+package com.matimi.generator;
+
+import com.matimi.config.CrudConfig;
+import com.matimi.domain.FieldDefinition;
+import com.matimi.template.TemplateEngine;
 
 import java.util.*;
 
 public class CrudWizard {
+    private final CrudGeneratorService generatorService;
+    private final Scanner scanner;
+
+    public CrudWizard(TemplateEngine templateEngine) {
+        this.generatorService = new CrudGeneratorService(templateEngine);
+        this.scanner = new Scanner(System.in);
+    }
 
     public static void start() {
-        Scanner scanner = new Scanner(System.in);
+        TemplateEngine engine = new TemplateEngine("src/main/resources/templates");
+        new CrudWizard(engine).startWizard();
+    }
 
+    private void startWizard() {
         printWelcomeMessage();
 
         String className = prompt(scanner, "➡️ Entity name");
@@ -17,14 +30,18 @@ public class CrudWizard {
 
         List<FieldDefinition> fields = promptFieldDefinitions(scanner);
 
-        Map<String, String> templateData = Map.of("ClassName", className, "basePackage", basePackage, "endpoint",
-                endpoint, "tableName", tableName, "fields", TemplateEngine.generateFieldsFromDefinitions(fields));
+        CrudConfig config = new CrudConfig(
+                className,
+                basePackage,
+                endpoint,
+                tableName,
+                fields,
+                java.time.LocalDateTime.now().toString(),
+                "1.0"
+        );
 
-        TemplateEngine engine = new TemplateEngine("src/main/resources/templates");
-
-        generateFiles(engine, className, templateData);
-
-        System.out.println("🎉 Generation finished successfully !");
+        generatorService.generateCrud(config);
+        System.out.println("🎉 Generation finished successfully!");
     }
 
     private static void printWelcomeMessage() {
@@ -63,12 +80,5 @@ public class CrudWizard {
         }
 
         return fields;
-    }
-
-    private static void generateFiles(TemplateEngine engine, String className, Map<String, String> data) {
-        engine.generate("Entity.tpl", "output/" + className + ".java", data);
-        engine.generate("Repository.tpl", "output/" + className + "Repository.java", data);
-        engine.generate("Service.tpl", "output/" + className + "Service.java", data);
-        engine.generate("Controller.tpl", "output/" + className + "Controller.java", data);
     }
 }

@@ -117,9 +117,19 @@
                 <version>2.44.0</version>
                 <configuration>
                     <java>
-                        <googleJavaFormat>
-                            <version>1.17.0</version>
-                        </googleJavaFormat>
+                        <eclipse>
+                            <file>${project.basedir}/spotless.xml</file>
+                        </eclipse>
+
+                        <licenseHeader>
+                            <content>/* (C)$YEAR */</content>
+                        </licenseHeader>
+
+                        <importOrder />
+                        <removeUnusedImports />
+                        <formatAnnotations />
+                        <trimTrailingWhitespace />
+                        <endWithNewline />
                     </java>
                 </configuration>
                 <executions>

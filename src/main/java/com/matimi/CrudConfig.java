@@ -9,11 +9,5 @@ public record CrudConfig(
     String tableName,
     List<FieldDefinition> fields,
     String generatedAt,
-    String version
-) {
-    public record FieldDefinition(
-            String name,
-            String type,
-            List<String> annotations
-    ) {}
+    String version) {
 }

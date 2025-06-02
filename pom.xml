@@ -121,10 +121,6 @@
                             <file>${project.basedir}/spotless.xml</file>
                         </eclipse>
 
-                        <licenseHeader>
-                            <content>/* (C)$YEAR */</content>
-                        </licenseHeader>
-
                         <importOrder />
                         <removeUnusedImports />
                         <formatAnnotations />

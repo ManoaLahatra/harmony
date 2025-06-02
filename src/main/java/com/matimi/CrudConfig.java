@@ -9,5 +9,4 @@ public record CrudConfig(
     String tableName,
     List<FieldDefinition> fields,
     String generatedAt,
-    String version) {
-}
+    String version) {}

@@ -4,7 +4,6 @@ import com.matimi.application.strategy.annotations.AnnotationStrategy;
 import com.matimi.application.strategy.annotations.validations.context.AnnotationContext;
 import com.matimi.application.strategy.annotations.validations.util.PromptUtils;
 import com.matimi.application.strategy.annotations.validations.util.TypeUtils;
-
 import java.util.List;
 
 public class NotNullStrategy implements AnnotationStrategy {
@@ -19,8 +18,8 @@ public class NotNullStrategy implements AnnotationStrategy {
             return List.of();
         }
 
-        return PromptUtils.confirm(context.getScanner(), "Is the field required (not null)?") ?
-            List.of("@NotNull") :
-            List.of();
+        return PromptUtils.confirm(context.getScanner(), "Is the field required (not null)?")
+                ? List.of("@NotNull")
+                : List.of();
     }
 }

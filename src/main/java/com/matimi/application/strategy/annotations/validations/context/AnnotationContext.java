@@ -1,11 +1,10 @@
 package com.matimi.application.strategy.annotations.validations.context;
 
 import com.matimi.application.strategy.annotations.validations.chains.AnnotationFlags;
-import lombok.Getter;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import lombok.Getter;
 
 public class AnnotationContext {
     private final Map<AnnotationFlags, Boolean> flags = new HashMap<>();

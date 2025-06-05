@@ -2,10 +2,9 @@ package com.matimi.application.strategy.annotations.validations.chains;
 
 import com.matimi.application.strategy.annotations.AnnotationStrategy;
 import com.matimi.application.strategy.annotations.validations.context.AnnotationContext;
-import lombok.AllArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class AnnotationChain {

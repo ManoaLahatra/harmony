@@ -5,7 +5,6 @@ import com.matimi.application.strategy.annotations.validations.chains.Annotation
 import com.matimi.application.strategy.annotations.validations.context.AnnotationContext;
 import com.matimi.application.strategy.annotations.validations.util.PromptUtils;
 import com.matimi.application.strategy.annotations.validations.util.TypeUtils;
-
 import java.util.List;
 
 public class IdStrategy implements AnnotationStrategy {

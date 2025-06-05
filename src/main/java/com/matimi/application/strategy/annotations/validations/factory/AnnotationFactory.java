@@ -6,18 +6,13 @@ import com.matimi.application.strategy.annotations.validations.strategies.Genera
 import com.matimi.application.strategy.annotations.validations.strategies.IdStrategy;
 import com.matimi.application.strategy.annotations.validations.strategies.NotNullStrategy;
 import com.matimi.application.strategy.annotations.validations.strategies.SizeStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class AnnotationFactory {
-    private static final AnnotationChain STRATEGIES = new AnnotationChain(List.of(
-            new NotNullStrategy(),
-            new SizeStrategy(),
-            new IdStrategy(),
-            new GeneratedValueStrategy()
-    ));
+    private static final AnnotationChain STRATEGIES = new AnnotationChain(
+            List.of(new NotNullStrategy(), new SizeStrategy(), new IdStrategy(), new GeneratedValueStrategy()));
 
     public static List<String> generateAnnotations(Scanner scanner, String fieldType) {
         AnnotationContext context = new AnnotationContext(fieldType, scanner);

@@ -1,34 +1,33 @@
 package com.matimi;
 
-import com.matimi.generator.CrudWizard;
-import com.matimi.generator.JsonCrudGenerator;
-import com.matimi.template.TemplateEngine;
-
+import com.matimi.application.CrudGenerator;
+import com.matimi.application.strategy.InteractiveStrategy;
+import com.matimi.application.strategy.JsonStrategy;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TemplateEngine engine = new TemplateEngine("src/main/resources/templates");
 
-        System.out.println("=== 🚀 Spring Boot CRUD Generator ===");
+        System.out.println("=== CRUD Generator ===");
         System.out.println("1. Interactive mode");
-        System.out.println("2. Generate from JSON file");
-        System.out.print("Choose mode: ");
+        System.out.println("2. JSON mode");
+        System.out.print("Choice: ");
 
-        String choice = scanner.nextLine().trim();
-
-        if ("2".equals(choice)) {
-            System.out.print("Enter JSON file path: ");
-            String jsonPath = scanner.nextLine().trim();
-            try {
-                new JsonCrudGenerator(engine).generateFromJson(jsonPath);
-                System.out.println("🎉 Generation finished successfully from JSON!");
-            } catch (Exception e) {
-                System.err.println("❌ Error processing JSON file: " + e.getMessage());
-            }
-        } else {
-            CrudWizard.start();
+        try {
+            CrudGenerator generator = switch (scanner.nextLine()) {
+                case "2" -> new CrudGenerator(new JsonStrategy(promptJsonPath(scanner)));
+                default -> new CrudGenerator(new InteractiveStrategy());
+            };
+            generator.execute();
+            System.out.println("✅ Generation successful!");
+        } catch (Exception e) {
+            System.err.println("❌ Error: " + e.getMessage());
         }
+    }
+
+    private static String promptJsonPath(Scanner scanner) {
+        System.out.print("JSON file path: ");
+        return scanner.nextLine().trim();
     }
 }

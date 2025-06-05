@@ -13,9 +13,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "\"{{tableName}}\"")
 public class {{ClassName}} {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
 
 {{fields}}
 }

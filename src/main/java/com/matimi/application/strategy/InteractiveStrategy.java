@@ -1,5 +1,6 @@
 package com.matimi.application.strategy;
 
+import com.matimi.application.strategy.annotations.validations.factory.AnnotationFactory;
 import com.matimi.domain.model.CrudConfig;
 import com.matimi.domain.model.FieldDefinition;
 import com.matimi.infrastructure.file.FileGenerator;
@@ -28,26 +29,17 @@ public class InteractiveStrategy implements CrudGenerationStrategy {
         do {
             String name = promptNonEmpty("Field name");
             String type = promptNonEmpty("Field type (ex: String, int)");
-            fields.add(new FieldDefinition(name, type, promptAnnotations()));
-        } while (confirm("Add filed"));
+            fields.add(new FieldDefinition(name, type, promptAnnotations(type)));
+        } while (confirm());
         return fields;
     }
 
-    private List<String> promptAnnotations() {
-        List<String> annotations = new ArrayList<>();
-        while (confirm("Add annotation?")) {
-            String annotation = promptNonEmpty("Annotation (ex: @NotNull, @Size(max=255))");
-            if (!annotation.startsWith("@")) {
-                System.err.println("⚠️ Annotation must start with @");
-                continue;
-            }
-            annotations.add(annotation);
-        }
-        return annotations;
+    private List<String> promptAnnotations(String fieldType) {
+        return AnnotationFactory.generateAnnotations(scanner, fieldType);
     }
 
-    private boolean confirm(String message) {
-        System.out.print(message + " (y/n): ");
+    private boolean confirm() {
+        System.out.print("Add field" + " (y/n): ");
         String input = scanner.nextLine().trim();
         return input.equalsIgnoreCase("y");
     }

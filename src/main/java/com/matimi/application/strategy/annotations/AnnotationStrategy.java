@@ -1,13 +1,10 @@
 package com.matimi.application.strategy.annotations;
 
+import com.matimi.application.strategy.annotations.validations.context.AnnotationContext;
+
 import java.util.List;
-import java.util.Scanner;
 
 public interface AnnotationStrategy {
     boolean isApplicable(String fieldType);
-    boolean shouldApply(Scanner scanner);
-    String generateAnnotation();
-    default List<String> getRequiredImports() {
-        return List.of();
-    }
+    List<String> process(AnnotationContext context);
 }
